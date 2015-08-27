@@ -49,6 +49,23 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
     }
 
     @Override
+    public Integer parse(String romanNumber) {
+        char[] romanNumbersChar= romanNumber.toCharArray();
+        int toReturn = 0;
+        for (int i = 0; i < romanNumbersChar.length; i++) {
+            int toAdd = romanToArabic.get(Character.toString(romanNumbersChar[i]));
+            if ((i + 1) != romanNumbersChar.length && romanToArabic.get(Character.toString(romanNumbersChar[i + 1])) > toAdd) {
+                if (formatIsInvalid(romanToArabic.get(Character.toString(romanNumbersChar[i + 1])),toAdd)) {
+                    return -1;
+                } else
+                    toAdd = -toAdd;
+            }
+            toReturn+=toAdd;
+        }
+        return toReturn;
+    }
+
+    @Override
     public String generate(int normalNumeral) {
         if (!numberIsSupported(normalNumeral)) {
             return NOT_SUPPORTED;
@@ -67,6 +84,7 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
         }
         return stringBuilder.toString();
     }
+
 
     private String romansFor(int i, int numberToConvert) {
         String toReturn = "";
@@ -106,26 +124,8 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
         return toReturn;
     }
 
-
     private boolean numberIsSupported(int normalNumeral) {
         return normalNumeral > 0 && normalNumeral < 4000;
-    }
-
-    @Override
-    public Integer parse(String romanNumber) {
-        char[] romanNumbersChar= romanNumber.toCharArray();
-        int toReturn = 0;
-        for (int i = 0; i < romanNumbersChar.length; i++) {
-            int toAdd = romanToArabic.get(Character.toString(romanNumbersChar[i]));
-            if ((i + 1) != romanNumbersChar.length && romanToArabic.get(Character.toString(romanNumbersChar[i + 1])) > toAdd) {
-                if (formatIsInvalid(romanToArabic.get(Character.toString(romanNumbersChar[i + 1])),toAdd)) {
-                    return -1;
-                } else
-                    toAdd = -toAdd;
-            }
-            toReturn+=toAdd;
-        }
-        return toReturn;
     }
 
     /**
