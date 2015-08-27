@@ -3,7 +3,6 @@ package rentalcars.converter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  * Created by zais on 8/26/2015.
@@ -50,10 +49,13 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
     @Override
     public Integer parse(String romanNumber) {
+        if (emptyInput(romanNumber)) return -1;
         char[] romanNumbersChar= romanNumber.toCharArray();
         int toReturn = 0;
         for (int i = 0; i < romanNumbersChar.length; i++) {
-            int toAdd = romanToArabic.get(Character.toString(romanNumbersChar[i]));
+            Integer integer = romanToArabic.get(Character.toString(romanNumbersChar[i]));
+            if (checkFailedInput(integer)) return -1;
+            int toAdd = integer;
             if ((i + 1) != romanNumbersChar.length && romanToArabic.get(Character.toString(romanNumbersChar[i + 1])) > toAdd) {
                 if (formatIsInvalid(romanToArabic.get(Character.toString(romanNumbersChar[i + 1])),toAdd)) {
                     return -1;
@@ -63,6 +65,14 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
             toReturn+=toAdd;
         }
         return toReturn;
+    }
+
+    private boolean emptyInput(String romanNumber) {
+        return romanNumber == null || romanNumber.length() == 0;
+    }
+
+    private boolean checkFailedInput(Integer integer) {
+        return integer == null;
     }
 
     @Override

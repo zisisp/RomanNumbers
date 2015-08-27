@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class RomanNumberGeneratorControler {
 
     public static final String RESULT = "result=";
+    public static final String OK = "OK";
     private RomanNumeralGenerator romanNumeralGenerator=new RomanNumeralGeneratorImpl();
 
     @RequestMapping("/parse")
-    public Result parse(@RequestParam("roman") String roman) {
+    public NumberResult parse(@RequestParam("roman") String roman) {
         int parsedNumber= romanNumeralGenerator.parse(roman);
         if (parsedNumber==-1) {
             return new NumberResult( -1, RomanNumeralGeneratorImpl.NOT_SUPPORTED);
@@ -24,12 +25,13 @@ public class RomanNumberGeneratorControler {
     }
 
     @RequestMapping("/generate")
-    public Result generate(@RequestParam("number") Integer number) {
+    public RomanResult generate(@RequestParam("number") Integer number) {
         String generateRoman = romanNumeralGenerator.generate(number);
         if (RomanNumeralGeneratorImpl.NOT_SUPPORTED.equals(generateRoman)) {
             return new RomanResult(null, RomanNumeralGeneratorImpl.NOT_SUPPORTED);
         } else {
-            return new RomanResult(generateRoman, "OK");
+            return new RomanResult(generateRoman, OK);
+
         }
     }
 

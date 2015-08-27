@@ -1,9 +1,9 @@
 package rentalcars;
 
-import rentalcars.converter.RomanNumeralGenerator;
 import rentalcars.converter.RomanNumeralGeneratorImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -60,6 +60,14 @@ public class RentalKata {
         testResults.add(checkRomanToArabic("IM", -1, "Should return -1 not 1999"));
         testResults.add(checkRomanToArabic("IC", -1, "Should return -1 not 99"));
         testResults.add(checkRomanToArabic("ID", -1, "Should return -1 not 499"));
+
+        //check wrong input
+        testResults.add(checkRomanToArabic("ABCD", -1, "Should return -1"));
+        testResults.add(checkRomanToArabic("aasd", -1, "Should return -1"));
+        testResults.add(checkRomanToArabic(".,1;", -1, "Should return -1"));
+        testResults.add(checkRomanToArabic("1123", -1, "Should return -1"));
+        testResults.add(checkRomanToArabic("", -1, "Should return -1"));
+        testResults.add(checkRomanToArabic(null, -1, "Should return -1"));
 
         return testResults;
     }
