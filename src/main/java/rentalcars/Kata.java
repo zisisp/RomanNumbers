@@ -12,7 +12,7 @@ import java.util.Collection;
  * Time: 5:32 μμ
  * Company: www.xe.gr
  */
-public class RentalKata {
+public class Kata {
     private static RomanNumeralGeneratorImpl generator = new RomanNumeralGeneratorImpl();
 
     public static void main(String[] args) {

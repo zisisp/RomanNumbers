@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import rentalcars.RentalCarsKataApplication;
+import rentalcars.Application;
 
 import java.nio.charset.Charset;
 
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * Created by zais on 8/27/2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RentalCarsKataApplication.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 public class RomanNumberGeneratorControlerTest {
 
@@ -105,7 +105,7 @@ public class RomanNumberGeneratorControlerTest {
         testGenerateService(1990, "MCMXC", RomanNumberGeneratorControler.OK);
         testGenerateService(2014, "MMXIV", RomanNumberGeneratorControler.OK);
         testGenerateService(1954, "MCMLIV", RomanNumberGeneratorControler.OK);
-        
+
     }
 
     private void testGenerateService(int number, String roman, String result) throws Exception {
