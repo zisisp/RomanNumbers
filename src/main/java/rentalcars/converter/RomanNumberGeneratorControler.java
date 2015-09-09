@@ -15,7 +15,7 @@ public class RomanNumberGeneratorControler {
     private RomanNumeralGenerator romanNumeralGenerator=new RomanNumeralGeneratorImpl();
 
     @RequestMapping("/parse")
-    public NumberResult parse(@RequestParam("roman") String roman) {
+    public Result parse(@RequestParam("roman") String roman) {
         int parsedNumber= romanNumeralGenerator.parse(roman);
         if (parsedNumber==-1) {
             return new NumberResult( -1, RomanNumeralGeneratorImpl.NOT_SUPPORTED);

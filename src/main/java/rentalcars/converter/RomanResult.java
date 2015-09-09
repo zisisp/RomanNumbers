@@ -3,12 +3,11 @@ package rentalcars.converter;
 /**
  * Created by zais on 8/27/2015.
  */
-public class RomanResult {
+public class RomanResult extends Result {
     private String roman;
-    private String result;
 
     public RomanResult(String roman, String result) {
-        this.result = result;
+        super(result);
         this.roman = roman;
     }
 
@@ -18,13 +17,5 @@ public class RomanResult {
 
     public void setRoman(String roman) {
         this.roman = roman;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
     }
 }

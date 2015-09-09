@@ -1,10 +1,14 @@
 package rentalcars.converter;
 
 /**
- * Created by zais on 8/27/2015.
+ * Created with IntelliJ IDEA.
+ * User: zep
+ * Date: 28/8/2015
+ * Time: 1:50 μμ
+ * Company: www.xe.gr
  */
 public abstract class Result {
-    private String result;
+    protected String result;
 
     public Result(String result) {
         this.result = result;
