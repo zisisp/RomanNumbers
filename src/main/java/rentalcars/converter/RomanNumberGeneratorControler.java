@@ -25,7 +25,14 @@ public class RomanNumberGeneratorControler {
     }
 
     @RequestMapping("/generate")
-    public RomanResult generate(@RequestParam("number") Integer number) {
+    public RomanResult generate(@RequestParam("number") String numberStr) {
+
+        int number= 0;
+        try {
+            number = Integer.parseInt(numberStr);
+        } catch (NumberFormatException e) {
+            return new RomanResult(null, RomanNumeralGeneratorImpl.NOT_SUPPORTED);
+        }
         String generateRoman = romanNumeralGenerator.generate(number);
         if (RomanNumeralGeneratorImpl.NOT_SUPPORTED.equals(generateRoman)) {
             return new RomanResult(null, RomanNumeralGeneratorImpl.NOT_SUPPORTED);

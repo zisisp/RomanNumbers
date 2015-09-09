@@ -37,9 +37,10 @@ public class RentalKata {
         testResults.add(checkArabicToRoman(99, "XCIX", "Should return XCIX"));
         testResults.add(checkArabicToRoman(256, "CCLVI", "Should return CCLVI"));
         testResults.add(checkArabicToRoman(513, "DXIII", "Should return DXIII"));
+        testResults.add(checkArabicToRoman(1954, "MCMLIV", "Should return MCMLIV"));
         testResults.add(checkArabicToRoman(1990, "MCMXC", "Should return MCMXC"));
         testResults.add(checkArabicToRoman(2014, "MMXIV", "Should return MMXIV"));
-        testResults.add(checkArabicToRoman(1954, "MCMLIV", "Should return MCMLIV"));
+        testResults.add(checkArabicToRoman(3000, "MMM", "Should return MMM"));
 
         //test results for RomanToArabic
         testResults.add(checkRomanToArabic("MCMLIV", 1954, "Should return 1954"));

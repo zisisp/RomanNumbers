@@ -49,10 +49,10 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
     @Override
     public Integer parse(String romanNumber) {
-        if (emptyInput(romanNumber)) return -1;
-        char[] romanNumbersChar= romanNumber.toCharArray();
-        int toReturn = 0;
-        for (int i = 0; i < romanNumbersChar.length; i++) {
+        if (emptyInput(romanNumber)) return -1;             //1
+        char[] romanNumbersChar= romanNumber.toCharArray(); //1?
+        int toReturn = 0;                                   //1?
+        for (int i = 0; i < romanNumbersChar.length; i++) { //romanNumbersChar.length ==n (max)
             Integer integer = romanToArabic.get(Character.toString(romanNumbersChar[i]));
             if (checkFailedInput(integer)) return -1;
             int toAdd = integer;
@@ -77,7 +77,7 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
     @Override
     public String generate(int normalNumeral) {
-        if (!numberIsSupported(normalNumeral)) {
+        if (!numberIsSupported(normalNumeral)) {//1
             return NOT_SUPPORTED;
         } else {
             return generateRoman(normalNumeral);
@@ -85,11 +85,11 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
     }
 
     private String generateRoman(int normalNumeral) {
-        char[] numberStr = (normalNumeral + "").toCharArray();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = numberStr.length; i > 0; i--) {
-            String strValueofCharToParse = Character.toString(numberStr[numberStr.length - i]);
-            int numberToConver = Integer.parseInt(strValueofCharToParse);
+        char[] numberStr = (normalNumeral + "").toCharArray();//1
+        StringBuilder stringBuilder = new StringBuilder();    //1
+        for (int i = numberStr.length; i > 0; i--) {        //numberStr.length = N
+            String strValueofCharToParse = Character.toString(numberStr[numberStr.length - i]);//1
+            int numberToConver = Integer.parseInt(strValueofCharToParse);//1
             stringBuilder.append(romansFor((int) Math.pow(10, i - 1), numberToConver));
         }
         return stringBuilder.toString();
@@ -97,15 +97,14 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
 
     private String romansFor(int i, int numberToConvert) {
-        String toReturn = "";
-        String baseRoman = arabicToRoman.get(i);
+        String toReturn = ""; //1
+        String baseRoman = arabicToRoman.get(i); //1
         switch (numberToConvert) {
             case 0:
-                return toReturn;
             case 1:
             case 2:
             case 3:
-                for (int j = 0; j < numberToConvert; j++) {
+                for (int j = 0; j < numberToConvert; j++) { //0-3
                     toReturn += baseRoman;
                 }
                 return toReturn;
@@ -114,24 +113,21 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
             case 6:
             case 7:
             case 8:
-                String romanFive = arabicToRoman.get(i * 5);
-                if (numberToConvert == 4) {
+                String romanFive = arabicToRoman.get(i * 5);//1
+                if (numberToConvert == 4) {             //1
                     return baseRoman + romanFive;
                 } else {
-                    toReturn = romanFive;
-                    for (int j = 0; j < numberToConvert - 5; j++) {
+                    toReturn = romanFive;               //1
+                    for (int j = 0; j < numberToConvert - 5; j++) {//0-3
                         toReturn += baseRoman;
                     }
-                    return toReturn;
+                    return toReturn;                                //1
                 }
             case 9:
-                String romanTen = arabicToRoman.get(i * 10);
-                return baseRoman + romanTen;
+            default:
+                String romanTen = arabicToRoman.get(i * 10); //1
+                return baseRoman + romanTen;                 //1
         }
-        for (int j = 0; j < Integer.parseInt(numberToConvert + ""); j++) {
-            toReturn += arabicToRoman.get(i);
-        }
-        return toReturn;
     }
 
     private boolean numberIsSupported(int normalNumeral) {

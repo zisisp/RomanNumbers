@@ -89,26 +89,27 @@ public class RomanNumberGeneratorControlerTest {
     @Test
     public void testGenerate() throws Exception {
         //test corner cases
-        testGenerateService(0,null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
-        testGenerateService(-1,null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
-        testGenerateService(4000,null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
+        testGenerateService("0",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
+        testGenerateService("-1",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
+        testGenerateService("4000",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
+        testGenerateService("qwer",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
         //test failures in arabicToRoman
-        testGenerateService(1, "I", RomanNumberGeneratorControler.OK);
-        testGenerateService(5, "V", RomanNumberGeneratorControler.OK);
-        testGenerateService(4, "IV", RomanNumberGeneratorControler.OK);
-        testGenerateService(6, "VI", RomanNumberGeneratorControler.OK);
-        testGenerateService(16, "XVI", RomanNumberGeneratorControler.OK);
-        testGenerateService(19, "XIX", RomanNumberGeneratorControler.OK);
-        testGenerateService(99, "XCIX", RomanNumberGeneratorControler.OK);
-        testGenerateService(256, "CCLVI", RomanNumberGeneratorControler.OK);
-        testGenerateService(513, "DXIII", RomanNumberGeneratorControler.OK);
-        testGenerateService(1990, "MCMXC", RomanNumberGeneratorControler.OK);
-        testGenerateService(2014, "MMXIV", RomanNumberGeneratorControler.OK);
-        testGenerateService(1954, "MCMLIV", RomanNumberGeneratorControler.OK);
-        
+        testGenerateService("1", "I", RomanNumberGeneratorControler.OK);
+        testGenerateService("5", "V", RomanNumberGeneratorControler.OK);
+        testGenerateService("4", "IV", RomanNumberGeneratorControler.OK);
+        testGenerateService("6", "VI", RomanNumberGeneratorControler.OK);
+        testGenerateService("16", "XVI", RomanNumberGeneratorControler.OK);
+        testGenerateService("19", "XIX", RomanNumberGeneratorControler.OK);
+        testGenerateService("99", "XCIX", RomanNumberGeneratorControler.OK);
+        testGenerateService("256", "CCLVI", RomanNumberGeneratorControler.OK);
+        testGenerateService("513", "DXIII", RomanNumberGeneratorControler.OK);
+        testGenerateService("1990", "MCMXC", RomanNumberGeneratorControler.OK);
+        testGenerateService("2014", "MMXIV", RomanNumberGeneratorControler.OK);
+        testGenerateService("1954", "MCMLIV", RomanNumberGeneratorControler.OK);
+
     }
 
-    private void testGenerateService(int number, String roman, String result) throws Exception {
+    private void testGenerateService(String number, String roman, String result) throws Exception {
         Matcher<String> emptyOrNullString = roman==null||roman.length()==0?isEmptyOrNullString():is(roman);
         mockMvc.perform(get("/generate?number="+number))
                 .andExpect(status().isOk())
