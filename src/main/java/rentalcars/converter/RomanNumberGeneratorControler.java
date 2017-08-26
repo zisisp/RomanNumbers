@@ -25,7 +25,7 @@ public class RomanNumberGeneratorControler {
     }
 
     @RequestMapping("/generate")
-    public RomanResult generate(@RequestParam("number") String numberStr) {
+    public Result generate(@RequestParam("number") String numberStr) {
 
         int number= 0;
         try {
