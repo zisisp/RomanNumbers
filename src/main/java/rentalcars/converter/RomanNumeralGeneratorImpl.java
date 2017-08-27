@@ -14,17 +14,17 @@ import java.util.Map;
  * and subtract from it the previous power. e.g.  4 is IV and not IIII
  */
 public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
-    public static final String I = "I";//1
-    public static final String V = "V";//5
-    public static final String X = "X";//10
-    public static final String L = "L";//50
-    public static final String C = "C";//100
-    public static final String D = "D";//500
-    public static final String M = "M";//1000
+    private static final String I = "I";//1
+    private static final String V = "V";//5
+    private static final String X = "X";//10
+    private static final String L = "L";//50
+    private static final String C = "C";//100
+    private static final String D = "D";//500
+    private static final String M = "M";//1000
     public static final String NOT_SUPPORTED = "Not supported";
 
-    public static Map<Integer, String> arabicToRoman = new HashMap<>();
-    public static Map<String, Integer> romanToArabic = new HashMap<>();
+    private static Map<Integer, String> arabicToRoman = new HashMap<>();
+    private static Map<String, Integer> romanToArabic = new HashMap<>();
 
     static {
         Map<Integer, String> tempArabicToRoman = new HashMap<>();
@@ -97,7 +97,7 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
 
     private String romansFor(int i, int numberToConvert) {
-        String toReturn = ""; //1
+        StringBuilder toReturn = new StringBuilder(); //1
         String baseRoman = arabicToRoman.get(i); //1
         switch (numberToConvert) {
             case 0:
@@ -105,9 +105,9 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
             case 2:
             case 3:
                 for (int j = 0; j < numberToConvert; j++) { //0-3
-                    toReturn += baseRoman;
+                    toReturn.append(baseRoman);
                 }
-                return toReturn;
+                return toReturn.toString();
             case 4:
             case 5:
             case 6:
@@ -117,11 +117,11 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
                 if (numberToConvert == 4) {             //1
                     return baseRoman + romanFive;
                 } else {
-                    toReturn = romanFive;               //1
+                    toReturn = new StringBuilder(romanFive);               //1
                     for (int j = 0; j < numberToConvert - 5; j++) {//0-3
-                        toReturn += baseRoman;
+                        toReturn.append(baseRoman);
                     }
-                    return toReturn;                                //1
+                    return toReturn.toString();                                //1
                 }
             case 9:
             default:
@@ -136,8 +136,8 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
     /**
      * format is invalid if not all consecutive numbers are used for example: 999 cannot be IM and 1999 cannot be MIM.
-     * @param greaterThan
-     * @param toAdd
+     * @param greaterThan x
+     * @param toAdd x
      * @return true if format is invalid
      */
     private boolean formatIsInvalid(Integer greaterThan, int toAdd) {
