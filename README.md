@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zisisp/RentalCars.svg?branch=master)](https://travis-ci.org/zisisp/RentalCars)
+
 ##How to run
 
 with maven:
