@@ -1,4 +1,4 @@
-package rentalcars.converter;
+package romanNumbers.converter;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by zais on 8/27/2015.
  */
 @RestController
-public class RomanNumberGeneratorControler {
+public class RomanNumberGeneratorController {
 
     public static final String RESULT = "result=";
     public static final String OK = "OK";

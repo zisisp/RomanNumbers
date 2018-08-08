@@ -1,12 +1,11 @@
-package rentalcars.converter;
+package romanNumbers.converter;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
-/**
- * Created by zais on 8/26/2015.
- */
+import static java.util.stream.Collectors.joining;
 
 /**
  * Roman Numeral Generator
@@ -21,10 +20,12 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
     private static final String C = "C";//100
     private static final String D = "D";//500
     private static final String M = "M";//1000
-    public static final String NOT_SUPPORTED = "Not supported";
+    static final String NOT_SUPPORTED = "Not supported";
+    private static final int FAILED_TO_PARSE = Integer.MIN_VALUE;
+    private static final Integer RETURN_ON_FAILURE = -1;
 
-    private static Map<Integer, String> arabicToRoman = new HashMap<>();
-    private static Map<String, Integer> romanToArabic = new HashMap<>();
+    private static Map<Integer, String> arabicToRoman;
+    private static Map<String, Integer> romanToArabic;
 
     static {
         Map<Integer, String> tempArabicToRoman = new HashMap<>();
@@ -49,30 +50,41 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
 
     @Override
     public Integer parse(String romanNumber) {
-        if (emptyInput(romanNumber)) return -1;             //1
-        char[] romanNumbersChar= romanNumber.toCharArray(); //1?
-        int toReturn = 0;                                   //1?
-        for (int i = 0; i < romanNumbersChar.length; i++) { //romanNumbersChar.length ==n (max)
-            Integer integer = romanToArabic.get(Character.toString(romanNumbersChar[i]));
-            if (checkFailedInput(integer)) return -1;
-            int toAdd = integer;
-            if ((i + 1) != romanNumbersChar.length && romanToArabic.get(Character.toString(romanNumbersChar[i + 1])) > toAdd) {
-                if (formatIsInvalid(romanToArabic.get(Character.toString(romanNumbersChar[i + 1])),toAdd)) {
-                    return -1;
-                } else
-                    toAdd = -toAdd;
-            }
-            toReturn+=toAdd;
+        if (emptyInput(romanNumber)) return RETURN_ON_FAILURE;
+        char[] romanNumbersChar = romanNumber.toCharArray();
+        int toReturn = 0;
+        for (int i = 0; i < romanNumbersChar.length; i++) {
+            Integer arabicToAdd = romanToArabic.getOrDefault(Character.toString(romanNumbersChar[i]), FAILED_TO_PARSE);
+            arabicToAdd = checkAndUpdateIfNeededArabicNumberToAdd(romanNumbersChar, i, arabicToAdd);
+            if (arabicToAdd == FAILED_TO_PARSE) return RETURN_ON_FAILURE;
+            toReturn += arabicToAdd;
         }
         return toReturn;
     }
 
-    private boolean emptyInput(String romanNumber) {
-        return romanNumber == null || romanNumber.length() == 0;
+    private Integer checkAndUpdateIfNeededArabicNumberToAdd(char[] romanNumbersChar, int i, Integer arabicToAdd) {
+        boolean hasAnotherRomanNumber = (i + 1) != romanNumbersChar.length;
+        if (hasAnotherRomanNumber) {
+            arabicToAdd = handleHavingAnotherNumberNext(romanNumbersChar[i + 1], arabicToAdd);
+        }
+        return arabicToAdd;
     }
 
-    private boolean checkFailedInput(Integer integer) {
-        return integer == null;
+    private Integer handleHavingAnotherNumberNext(char c, Integer arabicToAdd) {
+        Integer nextNumber = romanToArabic.getOrDefault(Character.toString(c), FAILED_TO_PARSE);
+        if (nextNumber > arabicToAdd) {
+            if (formatIsInvalid(nextNumber, arabicToAdd)) {
+                arabicToAdd = FAILED_TO_PARSE;
+            } else {
+                arabicToAdd = -arabicToAdd;
+            }
+        }
+        return arabicToAdd;
+    }
+
+
+    private boolean emptyInput(String romanNumber) {
+        return romanNumber == null || romanNumber.length() == 0;
     }
 
     @Override
@@ -84,44 +96,36 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
         }
     }
 
-    private String generateRoman(int normalNumeral) {
-        char[] numberStr = (normalNumeral + "").toCharArray();//1
+    private String generateRoman(int arabic) {
+        char[] numberStr = (arabic + "").toCharArray();//1
         StringBuilder stringBuilder = new StringBuilder();    //1
         for (int i = numberStr.length; i > 0; i--) {        //numberStr.length = N
-            String strValueofCharToParse = Character.toString(numberStr[numberStr.length - i]);//1
-            int numberToConver = Integer.parseInt(strValueofCharToParse);//1
-            stringBuilder.append(romansFor((int) Math.pow(10, i - 1), numberToConver));
+            String strValueOfCharToParse = Character.toString(numberStr[numberStr.length - i]);//1
+            int numberToConvert = Integer.parseInt(strValueOfCharToParse);//1
+            stringBuilder.append(romansFor((int) Math.pow(10, i - 1), numberToConvert));
         }
         return stringBuilder.toString();
     }
 
 
     private String romansFor(int i, int numberToConvert) {
-        StringBuilder toReturn = new StringBuilder(); //1
         String baseRoman = arabicToRoman.get(i); //1
         switch (numberToConvert) {
             case 0:
             case 1:
             case 2:
-            case 3:
-                for (int j = 0; j < numberToConvert; j++) { //0-3
-                    toReturn.append(baseRoman);
-                }
-                return toReturn.toString();
+            case 3://up to 3 we add this number
+                return addRomanNumbersToBaseNumber(baseRoman, numberToConvert);
             case 4:
             case 5:
             case 6:
             case 7:
             case 8:
-                String romanFive = arabicToRoman.get(i * 5);//1
+                String romanFive = arabicToRoman.get(i * 5);//get next roman number
                 if (numberToConvert == 4) {             //1
                     return baseRoman + romanFive;
                 } else {
-                    toReturn = new StringBuilder(romanFive);               //1
-                    for (int j = 0; j < numberToConvert - 5; j++) {//0-3
-                        toReturn.append(baseRoman);
-                    }
-                    return toReturn.toString();                                //1
+                    return romanFive + addRomanNumbersToBaseNumber(baseRoman, numberToConvert - 5);
                 }
             case 9:
             default:
@@ -130,18 +134,32 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
         }
     }
 
+    private String addRomanNumbersToBaseNumber(String baseRoman, int i) {
+        return IntStream
+                .range(0, i)
+                .boxed()
+                .map(x -> baseRoman)
+                .collect(joining());
+    }
+
+    /**
+     * we only support 1 to 3999
+     * @param normalNumeral
+     * @return
+     */
     private boolean numberIsSupported(int normalNumeral) {
         return normalNumeral > 0 && normalNumeral < 4000;
     }
 
     /**
      * format is invalid if not all consecutive numbers are used for example: 999 cannot be IM and 1999 cannot be MIM.
+     *
      * @param greaterThan x
-     * @param toAdd x
+     * @param toAdd       x
      * @return true if format is invalid
      */
     private boolean formatIsInvalid(Integer greaterThan, int toAdd) {
-        return greaterThan>toAdd*10;
+        return greaterThan > toAdd * 10;
     }
 
 }

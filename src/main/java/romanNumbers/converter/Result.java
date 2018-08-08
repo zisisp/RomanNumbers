@@ -1,11 +1,11 @@
-package rentalcars.converter;
+package romanNumbers.converter;
 
 /**
  * Created with IntelliJ IDEA.
  * User: zep
  * Date: 28/8/2015
  * Time: 1:50 μμ
- * Company: www.xe.gr
+ * Company: zisis pontikas
  */
 public abstract class Result {
     protected String result;

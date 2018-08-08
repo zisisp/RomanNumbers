@@ -1,4 +1,4 @@
-package rentalcars.converter;
+package romanNumbers.converter;
 
 import org.hamcrest.Matcher;
 import org.junit.Before;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import rentalcars.Application;
+import romanNumbers.Application;
 
 import java.nio.charset.Charset;
 
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class RomanNumberGeneratorControlerTest {
+public class RomanNumberGeneratorControllerTest {
 
     private MockMvc mockMvc;
 
@@ -38,7 +38,7 @@ public class RomanNumberGeneratorControlerTest {
             Charset.forName("utf8"));
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 
@@ -46,20 +46,20 @@ public class RomanNumberGeneratorControlerTest {
     @Test
     public void testParse() throws Exception {
         //test results for RomanToArabic
-        testParseService("V",5,RomanNumberGeneratorControler.OK);
-        testParseService("MCMLIV", 1954, RomanNumberGeneratorControler.OK);
-        testParseService("I", 1, RomanNumberGeneratorControler.OK);
-        testParseService("V", 5, RomanNumberGeneratorControler.OK);
-        testParseService("IV", 4, RomanNumberGeneratorControler.OK);
-        testParseService("VI", 6, RomanNumberGeneratorControler.OK);
-        testParseService("XVI", 16, RomanNumberGeneratorControler.OK);
-        testParseService("XIX", 19, RomanNumberGeneratorControler.OK);
-        testParseService("XCIX", 99, RomanNumberGeneratorControler.OK);
-        testParseService("CCLVI", 256, RomanNumberGeneratorControler.OK);
-        testParseService("DXIII", 513, RomanNumberGeneratorControler.OK);
-        testParseService("MCMXC", 1990, RomanNumberGeneratorControler.OK);
-        testParseService("MMXIV", 2014, RomanNumberGeneratorControler.OK);
-        testParseService("MCMLIV", 1954, RomanNumberGeneratorControler.OK);
+        testParseService("V",5, RomanNumberGeneratorController.OK);
+        testParseService("MCMLIV", 1954, RomanNumberGeneratorController.OK);
+        testParseService("I", 1, RomanNumberGeneratorController.OK);
+        testParseService("V", 5, RomanNumberGeneratorController.OK);
+        testParseService("IV", 4, RomanNumberGeneratorController.OK);
+        testParseService("VI", 6, RomanNumberGeneratorController.OK);
+        testParseService("XVI", 16, RomanNumberGeneratorController.OK);
+        testParseService("XIX", 19, RomanNumberGeneratorController.OK);
+        testParseService("XCIX", 99, RomanNumberGeneratorController.OK);
+        testParseService("CCLVI", 256, RomanNumberGeneratorController.OK);
+        testParseService("DXIII", 513, RomanNumberGeneratorController.OK);
+        testParseService("MCMXC", 1990, RomanNumberGeneratorController.OK);
+        testParseService("MMXIV", 2014, RomanNumberGeneratorController.OK);
+        testParseService("MCMLIV", 1954, RomanNumberGeneratorController.OK);
 
         //check failed format
         testParseService("IM", -1, RomanNumeralGeneratorImpl.NOT_SUPPORTED);
@@ -76,15 +76,6 @@ public class RomanNumberGeneratorControlerTest {
         testParseService(null, -1, RomanNumeralGeneratorImpl.NOT_SUPPORTED);
     }
 
-    private void testParseService(String roman, int number, String result) throws Exception {
-        mockMvc.perform(get("/parse?roman="+roman))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.number", is(number)))
-                .andExpect(jsonPath("$.result", is(result)));
-        System.out.println("Test for roman:"+roman+" to number:"+number+" is OK");
-    }
-
 
     @Test
     public void testGenerate() throws Exception {
@@ -94,19 +85,28 @@ public class RomanNumberGeneratorControlerTest {
         testGenerateService("4000",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
         testGenerateService("qwer",null,RomanNumeralGeneratorImpl.NOT_SUPPORTED);
         //test failures in arabicToRoman
-        testGenerateService("1", "I", RomanNumberGeneratorControler.OK);
-        testGenerateService("5", "V", RomanNumberGeneratorControler.OK);
-        testGenerateService("4", "IV", RomanNumberGeneratorControler.OK);
-        testGenerateService("6", "VI", RomanNumberGeneratorControler.OK);
-        testGenerateService("16", "XVI", RomanNumberGeneratorControler.OK);
-        testGenerateService("19", "XIX", RomanNumberGeneratorControler.OK);
-        testGenerateService("99", "XCIX", RomanNumberGeneratorControler.OK);
-        testGenerateService("256", "CCLVI", RomanNumberGeneratorControler.OK);
-        testGenerateService("513", "DXIII", RomanNumberGeneratorControler.OK);
-        testGenerateService("1990", "MCMXC", RomanNumberGeneratorControler.OK);
-        testGenerateService("2014", "MMXIV", RomanNumberGeneratorControler.OK);
-        testGenerateService("1954", "MCMLIV", RomanNumberGeneratorControler.OK);
+        testGenerateService("1", "I", RomanNumberGeneratorController.OK);
+        testGenerateService("5", "V", RomanNumberGeneratorController.OK);
+        testGenerateService("4", "IV", RomanNumberGeneratorController.OK);
+        testGenerateService("6", "VI", RomanNumberGeneratorController.OK);
+        testGenerateService("16", "XVI", RomanNumberGeneratorController.OK);
+        testGenerateService("19", "XIX", RomanNumberGeneratorController.OK);
+        testGenerateService("99", "XCIX", RomanNumberGeneratorController.OK);
+        testGenerateService("256", "CCLVI", RomanNumberGeneratorController.OK);
+        testGenerateService("513", "DXIII", RomanNumberGeneratorController.OK);
+        testGenerateService("1990", "MCMXC", RomanNumberGeneratorController.OK);
+        testGenerateService("2014", "MMXIV", RomanNumberGeneratorController.OK);
+        testGenerateService("1954", "MCMLIV", RomanNumberGeneratorController.OK);
 
+    }
+
+    private void testParseService(String roman, int number, String result) throws Exception {
+        mockMvc.perform(get("/parse?roman="+roman))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.number", is(number)))
+                .andExpect(jsonPath("$.result", is(result)));
+        System.out.println("Test for roman:"+roman+" to number:"+number+" is OK");
     }
 
     private void testGenerateService(String number, String roman, String result) throws Exception {
