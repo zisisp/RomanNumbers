@@ -27,7 +27,7 @@ public class RomanNumberGeneratorController {
     @RequestMapping("/generate")
     public Result generate(@RequestParam("number") String numberStr) {
 
-        int number= 0;
+        int number;
         try {
             number = Integer.parseInt(numberStr);
         } catch (NumberFormatException e) {
