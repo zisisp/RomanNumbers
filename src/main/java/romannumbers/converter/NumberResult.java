@@ -1,7 +1,7 @@
-package romanNumbers.converter;
+package romannumbers.converter;
 
 /**
- * Created by zais on 8/27/2015.
+ * Created by zpontikas on 8/27/2015.
  */
 public class NumberResult extends Result {
     private Integer number;

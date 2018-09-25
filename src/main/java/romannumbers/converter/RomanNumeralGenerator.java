@@ -1,7 +1,7 @@
-package romanNumbers.converter;
+package romannumbers.converter;
 
 /**
- * Created by zais on 8/26/2015.
+ * Created by zpontikas on 8/26/2015.
  */
 public interface RomanNumeralGenerator {
     String generate(int normalNumeral); // convert from int -> roman

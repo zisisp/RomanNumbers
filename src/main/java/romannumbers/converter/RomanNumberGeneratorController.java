@@ -1,11 +1,11 @@
-package romanNumbers.converter;
+package romannumbers.converter;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by zais on 8/27/2015.
+ * Created by zpontikas on 8/27/2015.
  */
 @RestController
 public class RomanNumberGeneratorController {

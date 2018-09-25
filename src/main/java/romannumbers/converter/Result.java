@@ -1,4 +1,4 @@
-package romanNumbers.converter;
+package romannumbers.converter;
 
 /**
  * Created with IntelliJ IDEA.

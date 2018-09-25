@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.2.5.RELEASE</version>
+    <version>1.5.10.RELEASE</version>
     <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
@@ -24,7 +24,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
     <!-- The main class to start by executing java -jar -->
-    <start-class>romanNumbers.Application</start-class>
+    <start-class>romannumbers.Application</start-class>
   </properties>
 
   <dependencies>
@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-ws</artifactId>
+      <artifactId>spring-boot-starter-web-services</artifactId>
     </dependency>
 
     <dependency>

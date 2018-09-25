@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/zisisp/RentalCars.svg?branch=master)](https://travis-ci.org/zisisp/RentalCars)
+[![Build Status](https://travis-ci.org/zisisp/RentalCars.svg?branch=master)](https://travis-ci.org/zisisp/RomanNumber)
 
 This is a Java Spring Boot service that translates Roman numbers to Arabic (modern numbers) numbers and vice versa
 ## How to run
@@ -14,7 +14,7 @@ mvn clean package
 ```
 and then 
 ```
-java -jar target/kata-1.0.jar
+java -jar target/RomanNumbers-1.0.jar
 ```
 
 
