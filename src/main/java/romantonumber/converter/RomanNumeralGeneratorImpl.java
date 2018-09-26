@@ -1,4 +1,4 @@
-package romannumbers.converter;
+package romantonumber.converter;
 
 import java.util.Collections;
 import java.util.HashMap;

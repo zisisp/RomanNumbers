@@ -1,4 +1,4 @@
-package romannumbers.converter;
+package romantonumber.converter;
 
 /**
  * Created by zpontikas on 8/26/2015.

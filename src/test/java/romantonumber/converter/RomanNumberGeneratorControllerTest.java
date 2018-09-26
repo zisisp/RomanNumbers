@@ -1,4 +1,4 @@
-package romannumbers.converter;
+package romantonumber.converter;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import static romannumbers.converter.RomanNumberGeneratorController.*;
-import static romannumbers.converter.RomanNumeralGeneratorImpl.*;
+import static romantonumber.converter.RomanNumberGeneratorController.*;
+import static romantonumber.converter.RomanNumeralGeneratorImpl.*;
 
 import java.nio.charset.Charset;
 import org.hamcrest.Matcher;
@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import romannumbers.Application;
+import romantonumber.Application;
 
 /**
  * Created by zpontikas on 8/27/2015.
