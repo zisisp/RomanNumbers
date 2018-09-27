@@ -7,15 +7,16 @@
   <groupId>com.zisis</groupId>
   <artifactId>RomanNumbers</artifactId>
   <version>1.0</version>
-  <packaging>jar</packaging>
+  <!--<packaging>jar</packaging>-->
+  <packaging>war</packaging>
 
   <name>RomanNumbers</name>
-  <description>This is a spring boot REST service that </description>
+  <description>This is a spring boot REST service that</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.10.RELEASE</version>
+    <version>1.5.16.RELEASE</version>
     <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
@@ -23,8 +24,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
+    <!--<java.version>1.8</java.version>-->
     <!-- The main class to start by executing java -jar -->
-    <start-class>romantonumber.Application</start-class>
+    <start-class>romanToNumber.Application</start-class>
   </properties>
 
   <dependencies>
@@ -35,6 +37,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
