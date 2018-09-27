@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/zisisp/RomanNumbers.svg?branch=master)](https://travis-ci.org/zisisp/RomanNumbers)
+[![Build Status](https://travis-ci.org/zisisp/RomanNumbers.svg)](https://travis-ci.org/zisisp/RomanNumbers)
 
 This is a Java Spring Boot service that translates Roman numbers to Arabic (modern numbers) numbers and vice versa
 ## How to run
