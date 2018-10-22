@@ -9,8 +9,8 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>RomanNumbers_Jetty</name>
-  <description>This is a spring boot REST service that </description>
+  <name>RomanNumbers_Tomcat_embed_core</name>
+  <description>This is a Java Spring Boot service that translates Roman numbers to Arabic (modern numbers) numbers and vice versa</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -37,6 +37,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
     </dependency>
 
     <!--<dependency>-->
