@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.zisis</groupId>
-  <artifactId>RomanNumbers</artifactId>
+  <artifactId>RomanNumbers_Undertow</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
@@ -41,20 +41,15 @@
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-undertow</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>com.jayway.jsonpath</groupId>-->
-      <!--<artifactId>json-path</artifactId>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>
