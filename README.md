@@ -21,6 +21,6 @@ java -jar target/RomanNumbers-1.0.jar
 ## Rest services
 The REST services are:
 
-[http://localhost:8080/parse?roman=V](http://localhost:8080/parse?roman=V)
+[http://localhost:8081/parse?roman=V](http://localhost:8081/parse?roman=V)
 
-[http://localhost:8080/generate?number=5](http://localhost:8080/generate?number=5)
+[http://localhost:8081/generate?number=5](http://localhost:8081/generate?number=5)

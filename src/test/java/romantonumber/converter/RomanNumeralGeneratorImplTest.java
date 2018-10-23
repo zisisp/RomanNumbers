@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 @RunWith(JUnit4.class)
 public class RomanNumeralGeneratorImplTest {
 
-  private static final String NOT_SUPPORTED = "Not supported";
   private static final String MUST_RETURN = "Must return ";
   private static final String MINUS_ONE = MUST_RETURN + " -1";
   private RomanNumeralGeneratorImpl generator = new RomanNumeralGeneratorImpl();
@@ -83,7 +82,7 @@ public class RomanNumeralGeneratorImplTest {
   private void checkArabicToRomanCustomMessage(int number,
       String failureMessage) {
     String result = generator.generate(number);
-    Assert.isTrue(result.equals(RomanNumeralGeneratorImplTest.NOT_SUPPORTED),
+    Assert.isTrue(result.equals(RomanNumeralGeneratorImpl.NOT_SUPPORTED),
         failureMessage + " but returned:" + result + " for input:" + number);
   }
 

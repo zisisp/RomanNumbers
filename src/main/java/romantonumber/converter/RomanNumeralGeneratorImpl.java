@@ -20,7 +20,7 @@ public class RomanNumeralGeneratorImpl implements RomanNumeralGenerator {
     private static final String C = "C";//100
     private static final String D = "D";//500
     private static final String M = "M";//1000
-    static final String NOT_SUPPORTED = "Not supported";
+    static final String NOT_SUPPORTED = "Not supported. Only numbers from 1 to 3999 are supported.";
     private static final int FAILED_TO_PARSE = Integer.MIN_VALUE;
     private static final Integer RETURN_ON_FAILURE = -1;
 

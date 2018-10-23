@@ -9,8 +9,10 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>RomanNumbers_Tomcat_embed_core</name>
-  <description>This is a Java Spring Boot service that translates Roman numbers to Arabic (modern numbers) numbers and vice versa</description>
+  <name>RomanNumbers_Undertow</name>
+  <description>This is a Java Spring Boot service that translates Roman numbers to Arabic (modern
+    numbers) numbers and vice versa
+  </description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -31,24 +33,31 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate.validator</groupId>
+          <artifactId>hibernate-validator</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
-      <groupId>org.apache.tomcat.embed</groupId>
-      <artifactId>tomcat-embed-core</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>com.jayway.jsonpath</groupId>-->
-      <!--<artifactId>json-path</artifactId>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
   </dependencies>
 
   <build>
@@ -90,5 +99,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
