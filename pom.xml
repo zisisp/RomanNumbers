@@ -10,7 +10,9 @@
   <packaging>jar</packaging>
 
   <name>RomanNumbers_Jetty</name>
-  <description>This is a Java Spring Boot service that translates Roman numbers to Arabic (modern numbers) numbers and vice versa</description>
+  <description>This is a Java Spring Boot service that translates Roman numbers to Arabic (modern
+    numbers) numbers and vice versa
+  </description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -36,25 +38,25 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate.validator</groupId>
+          <artifactId>hibernate-validator</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jetty</artifactId>
     </dependency>
-
-    <!--<dependency>-->
-      <!--<groupId>com.jayway.jsonpath</groupId>-->
-      <!--<artifactId>json-path</artifactId>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
   </dependencies>
 
   <build>
@@ -96,5 +98,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
